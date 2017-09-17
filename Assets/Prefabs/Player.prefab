@@ -790,7 +790,15 @@ MonoBehaviour:
   starGroupTransform: {fileID: 0}
   rockGroupTransform: {fileID: 0}
   hpSlider: {fileID: 114058872701675994}
+  startHp: 10
   hp: 20
+  parsec1: {fileID: 0}
+  parsec2: {fileID: 0}
+  distance: 0
+  slowParsecSpeed: 2000
+  fastParsecSpeed: 9990
+  textPanel: {fileID: 0}
+  gameOverText: {fileID: 0}
 --- !u!114 &114631923681151688
 MonoBehaviour:
   m_ObjectHideFlags: 1
