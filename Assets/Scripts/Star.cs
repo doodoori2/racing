@@ -16,9 +16,14 @@ public class Star : MonoBehaviour
     private float currentTargetSpeed;
     private float currentSpeed;
 
+    public LayerMask playerLayerMask;
+    public bool hit;
+
+    private float zDelta { get { return -currentSpeed * Time.deltaTime; } }
+    
     void Update()
     {
-        transform.Translate(0, 0, -currentSpeed * Time.deltaTime);
+        transform.Translate(0, 0, zDelta);
 
         if (transform.position.z < 0)
         {
@@ -32,6 +37,18 @@ public class Star : MonoBehaviour
         currentSpeed = Mathf.SmoothDamp(currentSpeed, currentTargetSpeed, ref vel, speedSmoothTime);
     }
 
+    private void FixedUpdate()
+    {
+        if (Physics.BoxCast(transform.position, new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z), -Vector3.forward, Quaternion.identity, Mathf.Abs(zDelta), playerLayerMask))
+        {
+            if (!hit)
+            {
+                Debug.Log("Player hit");
+                hit = true;
+            }
+        }
+    }
+
     public void SetSlowModeImmediate(bool slow)
     {
         SetSlowMode(slow);
@@ -43,5 +60,11 @@ public class Star : MonoBehaviour
     {
         currentTargetZScale = slow ? slowTargetZScale : normalTargetZScale;
         currentTargetSpeed = slow ? slowTargetSpeed : normalTargetSpeed;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(transform.position, new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z));
     }
 }

@@ -48,7 +48,7 @@ public class Player : MonoBehaviour
 
         if (s != slowMode)
         {
-            SetSlowMode(s);
+            //SetSlowMode(s);
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
@@ -61,7 +61,7 @@ public class Player : MonoBehaviour
     {
         slowMode = s;
 
-        Debug.LogFormat("Slow Mode: {0}", slowMode);
+        //Debug.LogFormat("Slow Mode: {0}", slowMode);
 
         for (int i = 0; i < starGroupTransform.childCount; i++)
         {
@@ -74,5 +74,10 @@ public class Player : MonoBehaviour
             var rock = rockGroupTransform.GetChild(i).GetComponent<Rock>();
             rock.SetSlowMode(slowMode);
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        //Debug.LogFormat("Collided with {0}", other.name);
     }
 }
