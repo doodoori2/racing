@@ -68,6 +68,15 @@ public class StarSpawner : MonoBehaviour
 
                 star.transform.parent = starGroupTransform;
 
+                if(i == 0)
+                {
+                    var slide = GameObject.FindObjectOfType<Slide>();
+                    if(slide != null)
+                    {
+                        slide.AddObject(star);
+                    }
+                }
+
                 lastSpawnTime = Time.time;
             }
 
