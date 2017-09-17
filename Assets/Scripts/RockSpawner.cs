@@ -34,7 +34,7 @@ public class RockSpawner : MonoBehaviour
                 var rock = Instantiate(rockPrefab);
 
                 rock.transform.position = new Vector3(
-                    -spawnXWidth / 2 + spawnYWidth * (float)r.NextDouble(),
+                    -spawnXWidth / 2 + spawnXWidth * (float)r.NextDouble(),
                     -spawnYWidth / 2 + spawnYWidth * (float)r.NextDouble(),
                     gameObject.transform.position.z - spawnZWidth / 2 + spawnZWidth * (float)r.NextDouble());
 

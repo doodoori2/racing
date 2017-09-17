@@ -18,12 +18,12 @@ public class Slide : MonoBehaviour {
 		left = GameObject.Instantiate(imagePrefab);
 		left.transform.parent = SlidingArea.transform;
 		left.transform.localPosition = new Vector3(-100.0f, 0.0f, 0.0f);
-		left.gameObject.SetActive(true);
+		left.gameObject.SetActive(false);
 
 		right = GameObject.Instantiate(imagePrefab);
 		right.transform.parent = SlidingArea.transform;
 		right.transform.localPosition = new Vector3(100.0f, 0.0f, 0.0f);
-		right.gameObject.SetActive(true);
+		right.gameObject.SetActive(false);
 	}
 	public void AddObject(GameObject newStarObject)
 	{
@@ -53,10 +53,10 @@ public class Slide : MonoBehaviour {
 			var p  = new Vector3( 100 * ratio, left.transform.localPosition.y, left.transform.localPosition.z);
 			right.transform.localPosition = p;
 		}
-		if(ratio < 0.01f)
+		if(ratio < 0.1f)
 		{
-			// left.gameObject.SetActive(false);
-			// right.gameObject.SetActive(false);
+			left.gameObject.SetActive(false);
+			right.gameObject.SetActive(false);
 		}
 	}
 }

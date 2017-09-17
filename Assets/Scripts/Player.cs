@@ -9,25 +9,31 @@ public class Player : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {   
+    {
+        var s = false;
+
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             transform.Translate(Vector3.left * speed * Time.deltaTime);
+            s = true;
         }
 
         if (Input.GetKey(KeyCode.RightArrow))
         {
             transform.Translate(Vector3.right * speed * Time.deltaTime);
+            s = true;
         }
 
         if (Input.GetKey(KeyCode.UpArrow))
         {
             transform.Translate(Vector3.up * speed * Time.deltaTime);
+            s = true;
         }
 
         if (Input.GetKey(KeyCode.DownArrow))
         {
             transform.Translate(Vector3.down * speed * Time.deltaTime);
+            s = true;
         }
 
         var cam = Camera.main;
@@ -40,23 +46,33 @@ public class Player : MonoBehaviour
         var yClipped = Mathf.Clamp(transform.position.y, bottomLeft.y, topRight.y);
         transform.position = new Vector3(xClipped, yClipped, transform.position.z);
 
+        if (s != slowMode)
+        {
+            SetSlowMode(s);
+        }
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            slowMode = !slowMode;
+            SetSlowMode(!slowMode);
+        }
+    }
 
-            Debug.LogFormat("Slow Mode: {0}", slowMode);
+    private void SetSlowMode(bool s)
+    {
+        slowMode = s;
 
-            for (int i = 0; i < starGroupTransform.childCount; i++)
-            {
-                var star = starGroupTransform.GetChild(i).GetComponent<Star>();
-                star.SetSlowMode(slowMode);
-            }
+        Debug.LogFormat("Slow Mode: {0}", slowMode);
 
-            for (int i = 0; i < rockGroupTransform.childCount; i++)
-            {
-                var rock = rockGroupTransform.GetChild(i).GetComponent<Rock>();
-                rock.SetSlowMode(slowMode);
-            }
+        for (int i = 0; i < starGroupTransform.childCount; i++)
+        {
+            var star = starGroupTransform.GetChild(i).GetComponent<Star>();
+            star.SetSlowMode(slowMode);
+        }
+
+        for (int i = 0; i < rockGroupTransform.childCount; i++)
+        {
+            var rock = rockGroupTransform.GetChild(i).GetComponent<Rock>();
+            rock.SetSlowMode(slowMode);
         }
     }
 }

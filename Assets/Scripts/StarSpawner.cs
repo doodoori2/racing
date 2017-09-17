@@ -36,16 +36,7 @@ public class StarSpawner : MonoBehaviour
     }
 
     void Update()
-    {
-        var cam = Camera.main;
-        var topRight = cam.ViewportToWorldPoint(new Vector3(1, 1, cam.nearClipPlane));
-        //var topLeft = cam.ViewportToWorldPoint(new Vector3(-1, 1, cam.nearClipPlane));
-        var bottomLeft = cam.ViewportToWorldPoint(new Vector3(0, 0, cam.nearClipPlane));
-        //var bottomRight = cam.ViewportToWorldPoint(new Vector3(1, -1, cam.nearClipPlane));
-
-        spawnXWidth = topRight.x * 2;
-        spawnYWidth = topRight.y * 2;
-
+    {   
         if (Time.time - lastSpawnTime > currentSpawnInterval)
         {
             var r = new System.Random();
@@ -53,15 +44,10 @@ public class StarSpawner : MonoBehaviour
             for (int i = 0; i < spawnCount; i++)
             {
                 var star = Instantiate(starPrefab);
-
-                var x = Random.Range(bottomLeft.x, topRight.x);
-                var y = Random.Range(bottomLeft.y, topRight.y);
-
-                Debug.LogFormat("Star spawned at {0}, {1}", x, y);
-
+                
                 star.transform.position = new Vector3(
-                    x,
-                    y,
+                    -spawnXWidth / 2 + spawnXWidth * (float)r.NextDouble(),
+                    -spawnYWidth / 2 + spawnYWidth * (float)r.NextDouble(),
                     gameObject.transform.position.z + Random.Range(-spawnZWidth / 2, spawnZWidth / 2));
 
                 star.GetComponent<Star>().SetSlowModeImmediate(player.slowMode);
