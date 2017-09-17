@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -6,11 +8,20 @@ public class Player : MonoBehaviour
     public bool slowMode = false;
     public Transform starGroupTransform;
     public Transform rockGroupTransform;
+    public Slider hpSlider;
+    public int hp = 10;
+
+    private void Awake()
+    {
+        hpSlider.maxValue = hp;
+    }
 
     // Update is called once per frame
     void Update()
     {
         var s = false;
+
+        hpSlider.value = hp;
 
         if (Input.GetKey(KeyCode.LeftArrow))
         {
@@ -54,6 +65,14 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             SetSlowMode(!slowMode);
+        }
+    }
+
+    internal void AddDamage(int v)
+    {
+        if (hp > 0)
+        {
+            hp--;
         }
     }
 

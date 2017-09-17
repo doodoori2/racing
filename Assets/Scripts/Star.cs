@@ -20,7 +20,12 @@ public class Star : MonoBehaviour
     public bool hit;
 
     private float zDelta { get { return -currentSpeed * Time.deltaTime; } }
-    
+    private Player player;
+    private void Awake()
+    {
+        player = GameObject.Find("Player").GetComponent<Player>();
+    }
+
     void Update()
     {
         transform.Translate(0, 0, zDelta);
@@ -45,6 +50,8 @@ public class Star : MonoBehaviour
             {
                 Debug.Log("Player hit");
                 hit = true;
+
+                player.AddDamage(1);
             }
         }
     }

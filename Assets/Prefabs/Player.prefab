@@ -789,6 +789,8 @@ MonoBehaviour:
   slowMode: 0
   starGroupTransform: {fileID: 0}
   rockGroupTransform: {fileID: 0}
+  hpSlider: {fileID: 114058872701675994}
+  hp: 20
 --- !u!114 &114631923681151688
 MonoBehaviour:
   m_ObjectHideFlags: 1
