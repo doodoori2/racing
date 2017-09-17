@@ -5,7 +5,7 @@ public class Rock : MonoBehaviour
     public float speed = 1;
     void Update()
     {
-        transform.Translate(0, 0, -speed);
+        transform.Translate(0, 0, -speed * Time.deltaTime);
 
         if (transform.position.z < 0)
         {

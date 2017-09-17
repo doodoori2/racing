@@ -9,6 +9,7 @@ public class RockSpawner : MonoBehaviour
     public float spawnYWidth = 100;
     public float spawnZWidth = 100;
     public int spawnCount = 20;
+    public Transform rockGroupTransform;
 
     void Update()
     {
@@ -19,10 +20,14 @@ public class RockSpawner : MonoBehaviour
             for (int i = 0; i < spawnCount; i++)
             {
                 var rock = Instantiate(rockPrefab);
+
                 rock.transform.position = new Vector3(
                     -spawnXWidth / 2 + spawnYWidth * (float)r.NextDouble(),
                     -spawnYWidth / 2 + spawnYWidth * (float)r.NextDouble(),
                     gameObject.transform.position.z - spawnZWidth / 2 + spawnZWidth * (float)r.NextDouble());
+
+                rock.transform.parent = rockGroupTransform;
+
                 lastSpawnTime = Time.time;
             }
         }
